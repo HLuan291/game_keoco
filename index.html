@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GAME KÉO CO CÂU HỎI</title>
+    <meta
+      name="description"
+      content="Game kéo co chibi cho hai đội trả lời câu hỏi lần lượt, có hẹn giờ, số đáp án tùy chỉnh và thiết lập đáp án đúng."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="arena-card">
+        <header class="topbar">
+          <div>
+            <p>GAME HỌC TẬP TƯƠNG TÁC</p>
+            <h1>KÉO CO CÂU HỎI</h1>
+          </div>
+          <button id="editBtn" type="button">CHỈNH SỬA</button>
+        </header>
+
+        <div class="score-strip">
+          <div class="team-score team-a">
+            <span id="teamAName">ĐỘI MẶT TRỜI</span>
+            <strong id="teamAScore">0</strong>
+          </div>
+          <div class="round-status">
+            <span>LƯỢT</span>
+            <strong id="turnLabel">ĐỘI MẶT TRỜI</strong>
+          </div>
+          <div class="team-score team-b">
+            <span id="teamBName">ĐỘI CẦU VỒNG</span>
+            <strong id="teamBScore">0</strong>
+          </div>
+        </div>
+
+        <section class="tug-stage" aria-label="SÂN KÉO CO">
+          <div class="cloud cloud-one"></div>
+          <div class="cloud cloud-two"></div>
+          <div class="flag-line"></div>
+          <div class="ground"></div>
+
+          <div id="ropeScene" class="rope-scene">
+            <div class="team team-left">
+              <div class="chibi red"><span></span></div>
+              <div class="chibi orange"><span></span></div>
+              <div class="chibi pink"><span></span></div>
+            </div>
+
+            <div class="rope-wrap">
+              <div class="rope"></div>
+              <div class="center-knot">★</div>
+            </div>
+
+            <div class="team team-right">
+              <div class="chibi blue"><span></span></div>
+              <div class="chibi green"><span></span></div>
+              <div class="chibi purple"><span></span></div>
+            </div>
+          </div>
+
+          <div class="notch-track" aria-label="THANH TIẾN TRÌNH">
+            <span>-5</span>
+            <span>-4</span>
+            <span>-3</span>
+            <span>-2</span>
+            <span>-1</span>
+            <span>0</span>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+          </div>
+
+          <div id="winnerOverlay" class="winner-overlay" aria-live="polite" aria-hidden="true" hidden>
+            <div class="confetti-field" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <strong id="winnerText">CHÚC MỪNG ĐỘI ĐÃ CHIẾN THẮNG!</strong>
+          </div>
+        </section>
+      </section>
+
+      <aside class="quiz-card">
+        <div class="timer-ring">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <circle cx="60" cy="60" r="52"></circle>
+            <circle id="timerCircle" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <strong id="timerText">30</strong>
+        </div>
+
+        <div class="question-box">
+          <span id="questionIndex">CÂU 1 / 5</span>
+          <h2 id="questionText">SẴN SÀNG BẮT ĐẦU?</h2>
+        </div>
+
+        <div id="answers" class="answers"></div>
+
+        <div class="controls">
+          <button id="startBtn" class="primary" type="button">BẮT ĐẦU</button>
+          <button id="nextBtn" type="button">CÂU TIẾP</button>
+          <button id="resetBtn" type="button">CHƠI LẠI</button>
+        </div>
+
+        <p id="message" class="message">ĐỘI TRẢ LỜI ĐÚNG SẼ KÉO DÂY VỀ PHÍA MÌNH 1 NẤC.</p>
+      </aside>
+    </main>
+
+    <dialog id="editorDialog" class="editor-dialog">
+      <form method="dialog" class="editor-panel">
+        <header class="editor-header">
+          <div>
+            <p>THIẾT LẬP TRÒ CHƠI</p>
+            <h2>BỘ CÂU HỎI KÉO CO</h2>
+          </div>
+          <button value="close" type="submit">ĐÓNG</button>
+        </header>
+
+        <section class="settings-grid">
+          <label>
+            TÊN ĐỘI 1
+            <input id="teamAInput" type="text" />
+          </label>
+          <label>
+            TÊN ĐỘI 2
+            <input id="teamBInput" type="text" />
+          </label>
+          <label>
+            SỐ CÂU HỎI
+            <input id="questionCountInput" min="1" max="30" type="number" />
+          </label>
+          <label>
+            THỜI GIAN MỖI CÂU
+            <input id="timeInput" min="5" max="180" type="number" />
+          </label>
+          <label>
+            SỐ LƯỢNG ĐÁP ÁN
+            <select id="answerCountInput">
+              <option value="2">2 ĐÁP ÁN</option>
+              <option value="3">3 ĐÁP ÁN</option>
+              <option value="4">4 ĐÁP ÁN</option>
+              <option value="5">5 ĐÁP ÁN</option>
+            </select>
+          </label>
+          <button id="applySettingsBtn" class="save-button" type="button">ÁP DỤNG</button>
+        </section>
+
+        <section class="question-editor">
+          <div class="editor-tools">
+            <h3>DANH SÁCH CÂU HỎI</h3>
+            <button id="saveQuestionsBtn" type="button">LƯU CÂU HỎI</button>
+          </div>
+          <div id="questionForms" class="question-forms"></div>
+        </section>
+      </form>
+    </dialog>
+
+    <script src="script.js"></script>
+  </body>
+</html>
