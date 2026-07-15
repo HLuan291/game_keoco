@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game id="game_keoco" type="tug-war-quiz" language="vi">
+  <title>GAME KÉO CO CÂU HỎI</title>
+  <settings>
+    <questionCount>5</questionCount>
+    <timePerQuestion unit="seconds">30</timePerQuestion>
+    <answerCount>4</answerCount>
+    <winPullSteps>5</winPullSteps>
+    <correctSoundDuration unit="seconds">1</correctSoundDuration>
+    <wrongSoundDuration unit="seconds">1</wrongSoundDuration>
+    <winSoundDuration unit="seconds">5</winSoundDuration>
+  </settings>
+  <teams>
+    <team id="A" side="left">
+      <name>ĐỘI MẶT TRỜI</name>
+      <players>
+        <player gender="nam" image="assets/chibi-boy-tug.png" />
+        <player gender="nữ" image="assets/chibi-girl-tug.png" />
+        <player gender="nam" image="assets/chibi-boy-tug.png" />
+        <player gender="nữ" image="assets/chibi-girl-tug.png" />
+      </players>
+    </team>
+    <team id="B" side="right">
+      <name>ĐỘI CẦU VỒNG</name>
+      <players>
+        <player gender="nam" image="assets/chibi-boy-tug.png" />
+        <player gender="nữ" image="assets/chibi-girl-tug.png" />
+        <player gender="nam" image="assets/chibi-boy-tug.png" />
+        <player gender="nữ" image="assets/chibi-girl-tug.png" />
+      </players>
+    </team>
+  </teams>
+  <sounds>
+    <sound event="correct" src="assets/right-answer.mp3" />
+    <sound event="wrong" src="assets/wrong-answer.mp3" />
+    <sound event="win" src="assets/win.mp3" />
+  </sounds>
+  <questions>
+    <question id="1">
+      <text>THỦ ĐÔ CỦA VIỆT NAM LÀ GÌ?</text>
+      <answers correct="1">
+        <answer id="1">HÀ NỘI</answer>
+        <answer id="2">ĐÀ NẴNG</answer>
+        <answer id="3">TP. HỒ CHÍ MINH</answer>
+        <answer id="4">HUẾ</answer>
+      </answers>
+    </question>
+    <question id="2">
+      <text>5 + 7 = ?</text>
+      <answers correct="3">
+        <answer id="1">10</answer>
+        <answer id="2">11</answer>
+        <answer id="3">12</answer>
+        <answer id="4">13</answer>
+      </answers>
+    </question>
+    <question id="3">
+      <text>TỪ NÀO LÀ DANH TỪ?</text>
+      <answers correct="3">
+        <answer id="1">CHẠY</answer>
+        <answer id="2">ĐẸP</answer>
+        <answer id="3">QUYỂN SÁCH</answer>
+        <answer id="4">NHANH</answer>
+      </answers>
+    </question>
+    <question id="4">
+      <text>NƯỚC SÔI Ở BAO NHIÊU ĐỘ C?</text>
+      <answers correct="3">
+        <answer id="1">50</answer>
+        <answer id="2">80</answer>
+        <answer id="3">100</answer>
+        <answer id="4">120</answer>
+      </answers>
+    </question>
+    <question id="5">
+      <text>HÀNH TINH NÀO GẦN MẶT TRỜI NHẤT?</text>
+      <answers correct="1">
+        <answer id="1">SAO THỦY</answer>
+        <answer id="2">SAO KIM</answer>
+        <answer id="3">TRÁI ĐẤT</answer>
+        <answer id="4">SAO HỎA</answer>
+      </answers>
+    </question>
+  </questions>
+</game>
