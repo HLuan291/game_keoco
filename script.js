@@ -53,6 +53,11 @@ const sounds = {
 sounds.right.volume = 0.9;
 sounds.wrong.volume = 0.9;
 sounds.win.volume = 0.9;
+Object.values(sounds).forEach((audio) => {
+  audio.preload = "auto";
+  audio.load();
+});
+const soundStops = new WeakMap();
 
 const els = {
   teamAName: document.querySelector("#teamAName"),
@@ -226,6 +231,7 @@ function escapeHtml(value) {
 }
 
 function startGame() {
+  unlockSounds();
   resetRuntime(false);
   hideWinnerOverlay();
   state.running = true;
@@ -403,17 +409,41 @@ function clamp(value, min, max) {
 }
 
 function playClip(audio, durationMs) {
-  try {
+  if (!audio) return;
+  clearTimeout(soundStops.get(audio));
+  audio.pause();
+  audio.currentTime = 0;
+  const playTask = audio.play();
+  if (playTask?.catch) playTask.catch(() => {});
+  const stopTimer = setTimeout(() => {
     audio.pause();
     audio.currentTime = 0;
-    audio.play();
-    setTimeout(() => {
+  }, durationMs);
+  soundStops.set(audio, stopTimer);
+}
+
+function unlockSounds() {
+  Object.values(sounds).forEach((audio) => {
+    const oldVolume = audio.volume;
+    audio.volume = 0;
+    audio.currentTime = 0;
+    const playTask = audio.play();
+    if (playTask?.then) {
+      playTask
+        .then(() => {
+          audio.pause();
+          audio.currentTime = 0;
+          audio.volume = oldVolume;
+        })
+        .catch(() => {
+          audio.volume = oldVolume;
+        });
+    } else {
       audio.pause();
       audio.currentTime = 0;
-    }, durationMs);
-  } catch {
-    // Trình duyệt có thể chặn âm thanh nếu người dùng chưa tương tác.
-  }
+      audio.volume = oldVolume;
+    }
+  });
 }
 
 function showWinnerOverlay(message) {
