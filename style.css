@@ -21,6 +21,9 @@
 body {
   margin: 0;
   min-height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: auto;
   color: var(--ink);
   font-family: Arial, Helvetica, sans-serif;
   text-transform: uppercase;
@@ -44,12 +47,13 @@ button {
 
 .app-shell {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 390px;
-  gap: 18px;
-  min-height: 100vh;
-  width: min(1500px, 100%);
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 12px;
+  aspect-ratio: 16 / 9;
+  width: min(100vw, calc(100vh * 16 / 9), 1366px);
+  max-height: 100vh;
   margin: 0 auto;
-  padding: 18px;
+  padding: 10px;
 }
 
 .arena-card,
@@ -64,8 +68,8 @@ button {
 .arena-card {
   display: grid;
   grid-template-rows: auto auto 1fr;
-  min-height: calc(100vh - 36px);
-  padding: 18px;
+  min-height: 0;
+  padding: 12px;
 }
 
 .topbar {
@@ -73,7 +77,7 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 14px 18px;
+  padding: 10px 14px;
   color: #fff;
   border: 5px solid #ffb247;
   border-radius: 18px;
@@ -95,7 +99,7 @@ h3 {
 }
 
 h1 {
-  font-size: clamp(32px, 5vw, 58px);
+  font-size: clamp(24px, 3.2vw, 42px);
   line-height: .95;
 }
 
@@ -121,8 +125,8 @@ h1 {
 .score-strip {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  gap: 12px;
-  margin: 14px 0;
+  gap: 8px;
+  margin: 10px 0;
 }
 
 .team-score,
@@ -130,7 +134,7 @@ h1 {
   display: grid;
   justify-items: center;
   gap: 4px;
-  padding: 12px;
+  padding: 8px;
   border-radius: 18px;
   background: #fff;
 }
@@ -143,7 +147,7 @@ h1 {
 }
 
 .team-score strong {
-  font-size: 34px;
+  font-size: 26px;
 }
 
 .team-a strong {
@@ -162,7 +166,8 @@ h1 {
 .tug-stage {
   position: relative;
   overflow: hidden;
-  min-height: 520px;
+  min-height: 0;
+  aspect-ratio: 16 / 7.2;
   border-radius: 22px;
   background:
     linear-gradient(90deg, rgba(255,255,255,.36) 1px, transparent 1px) 0 0 / 50px 50px,
@@ -236,9 +241,9 @@ h1 {
   --pull: 0px;
   position: absolute;
   left: 50%;
-  top: 48%;
+  top: 50%;
   display: grid;
-  grid-template-columns: 410px 260px 410px;
+  grid-template-columns: 330px 210px 330px;
   align-items: center;
   justify-content: center;
   gap: 0;
@@ -266,11 +271,11 @@ h1 {
 .tug-kid {
   position: relative;
   z-index: 2;
-  width: 132px;
-  height: 196px;
+  width: 104px;
+  height: 154px;
   object-fit: contain;
   object-position: center bottom;
-  margin-left: -34px;
+  margin-left: -28px;
   filter: drop-shadow(0 12px 12px rgba(112, 66, 24, .2));
   transform-origin: 50% 100%;
   animation: tugBounce 1s ease-in-out infinite;
@@ -305,7 +310,7 @@ h1 {
 
 .team-left .girl,
 .team-right .girl {
-  width: 142px;
+  width: 112px;
 }
 
 .team-left .tug-kid:nth-child(2),
@@ -325,7 +330,7 @@ h1 {
 }
 
 .rope {
-  width: 280px;
+  width: 230px;
   height: 16px;
   border-radius: 999px;
   background: repeating-linear-gradient(45deg, #8a5a34 0 12px, #bd8854 12px 24px);
@@ -448,16 +453,16 @@ h1 {
 .quiz-card {
   display: grid;
   align-content: start;
-  gap: 14px;
-  min-height: calc(100vh - 36px);
-  padding: 18px;
+  gap: 10px;
+  min-height: 0;
+  padding: 12px;
 }
 
 .timer-ring {
   position: relative;
   justify-self: center;
-  width: 132px;
-  height: 132px;
+  width: 98px;
+  height: 98px;
 }
 
 .timer-ring svg {
@@ -489,11 +494,11 @@ h1 {
   display: grid;
   place-items: center;
   color: var(--pink);
-  font-size: 34px;
+  font-size: 28px;
 }
 
 .question-box {
-  padding: 16px;
+  padding: 12px;
   border: 3px dashed #ffd6e8;
   border-radius: 18px;
   background: #fff;
@@ -508,18 +513,18 @@ h1 {
 .question-box h2 {
   margin-top: 8px;
   color: var(--ink);
-  font-size: 24px;
+  font-size: 19px;
   line-height: 1.15;
 }
 
 .answers {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .answer-button {
-  min-height: 54px;
-  padding: 10px 14px;
+  min-height: 44px;
+  padding: 8px 12px;
   color: var(--ink);
   border: 3px solid #fff3b8;
   border-radius: 16px;
@@ -559,7 +564,7 @@ h1 {
 .message {
   margin: 0;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 800;
   line-height: 1.4;
 }
@@ -722,6 +727,9 @@ select {
 @media (max-width: 1100px) {
   .app-shell {
     grid-template-columns: 1fr;
+    aspect-ratio: auto;
+    width: min(100%, 760px);
+    max-height: none;
   }
 
   .arena-card,
@@ -734,7 +742,7 @@ select {
   }
 
   .rope-scene {
-    transform: translate(calc(-50% + var(--pull)), -50%) scale(.86);
+    transform: translate(calc(-50% + var(--pull)), -50%) scale(.74);
   }
 }
 
@@ -752,27 +760,27 @@ select {
   }
 
   .rope-scene {
-    grid-template-columns: 320px 210px 320px;
-    transform: translate(calc(-50% + var(--pull)), -50%) scale(.48);
+    grid-template-columns: 270px 170px 270px;
+    transform: translate(calc(-50% + var(--pull)), -50%) scale(.52);
   }
 
   .tug-stage {
-    min-height: 430px;
+    aspect-ratio: 16 / 8.8;
   }
 
   .tug-kid {
-    width: 122px;
-    height: 182px;
-    margin-left: -36px;
+    width: 94px;
+    height: 140px;
+    margin-left: -31px;
   }
 
   .team-left .girl,
   .team-right .girl {
-    width: 132px;
+    width: 102px;
   }
 
   .rope {
-    width: 230px;
+    width: 190px;
   }
 
   .settings-grid {
