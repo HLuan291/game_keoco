@@ -238,7 +238,7 @@ h1 {
   left: 50%;
   top: 48%;
   display: grid;
-  grid-template-columns: 260px 320px 260px;
+  grid-template-columns: 410px 260px 410px;
   align-items: center;
   justify-content: center;
   gap: 0;
@@ -249,95 +249,74 @@ h1 {
 .team {
   display: flex;
   align-items: end;
-  gap: 8px;
+  gap: 0;
+  min-width: 0;
 }
 
 .team-left {
   justify-content: flex-end;
+  padding-right: 6px;
 }
 
 .team-right {
   justify-content: flex-start;
+  padding-left: 6px;
 }
 
-.chibi {
+.tug-kid {
   position: relative;
-  width: 72px;
-  height: 112px;
+  z-index: 2;
+  width: 132px;
+  height: 196px;
+  object-fit: contain;
+  object-position: center bottom;
+  margin-left: -34px;
+  filter: drop-shadow(0 12px 12px rgba(112, 66, 24, .2));
   transform-origin: 50% 100%;
   animation: tugBounce 1s ease-in-out infinite;
 }
 
-.team-left .chibi {
+.tug-kid:first-child {
+  margin-left: 0;
+}
+
+.team-left .tug-kid {
   transform: rotate(-8deg);
 }
 
-.team-right .chibi {
+.team-right .tug-kid {
   transform: rotate(8deg) scaleX(-1);
 }
 
-.chibi::before {
-  content: "";
-  position: absolute;
-  left: 12px;
-  top: 0;
-  width: 48px;
-  height: 48px;
-  border: 4px solid #fff;
-  border-radius: 50%;
-  background: #ffd5ad;
-  box-shadow: inset -6px -6px 0 rgba(80,40,20,.08);
+.team-left .tug-kid:nth-child(2),
+.team-right .tug-kid:nth-child(2) {
+  animation-delay: .12s;
 }
 
-.chibi::after {
-  content: "";
-  position: absolute;
-  left: 10px;
-  top: 42px;
-  width: 52px;
-  height: 58px;
-  border: 4px solid #fff;
-  border-radius: 22px 22px 12px 12px;
-  background: var(--shirt, var(--blue));
-  box-shadow: inset -8px -8px 0 rgba(0,0,0,.08);
+.team-left .tug-kid:nth-child(3),
+.team-right .tug-kid:nth-child(3) {
+  animation-delay: .24s;
 }
 
-.chibi span {
-  position: absolute;
-  left: 18px;
-  top: -3px;
-  z-index: 2;
-  width: 38px;
-  height: 22px;
-  border-radius: 50% 50% 20% 20%;
-  background: #2e2525;
+.team-left .tug-kid:nth-child(4),
+.team-right .tug-kid:nth-child(4) {
+  animation-delay: .36s;
 }
 
-.chibi span::before,
-.chibi span::after {
-  content: "";
-  position: absolute;
-  top: 30px;
-  width: 7px;
-  height: 9px;
-  border-radius: 50%;
-  background: #2c2230;
+.team-left .girl,
+.team-right .girl {
+  width: 142px;
 }
 
-.chibi span::before {
-  left: 6px;
+.team-left .tug-kid:nth-child(2),
+.team-right .tug-kid:nth-child(2) {
+  margin-bottom: 10px;
 }
 
-.chibi span::after {
-  right: 6px;
+.team-left .tug-kid:nth-child(3),
+.team-right .tug-kid:nth-child(3) {
+  margin-bottom: 4px;
 }
-
-.red { --shirt: #ff5d6c; }
-.orange { --shirt: #ff9b54; }
-.pink { --shirt: #ff7eb6; }
-.blue { --shirt: #64c7ff; }
-.green { --shirt: #5ade9a; }
-.purple { --shirt: #8c7cff; }
 
 .rope-wrap {
   position: relative;
@@ -346,7 +325,7 @@ h1 {
 }
 
 .rope {
-  width: 320px;
+  width: 280px;
   height: 16px;
   border-radius: 999px;
   background: repeating-linear-gradient(45deg, #8a5a34 0 12px, #bd8854 12px 24px);
@@ -753,6 +732,10 @@ select {
   .settings-grid {
     grid-template-columns: 1fr 1fr;
   }
+
+  .rope-scene {
+    transform: translate(calc(-50% + var(--pull)), -50%) scale(.86);
+  }
 }
 
 @media (max-width: 720px) {
@@ -769,8 +752,27 @@ select {
   }
 
   .rope-scene {
-    grid-template-columns: 170px 190px 170px;
-    transform: translate(calc(-50% + var(--pull)), -50%) scale(.72);
+    grid-template-columns: 320px 210px 320px;
+    transform: translate(calc(-50% + var(--pull)), -50%) scale(.48);
+  }
+
+  .tug-stage {
+    min-height: 430px;
+  }
+
+  .tug-kid {
+    width: 122px;
+    height: 182px;
+    margin-left: -36px;
+  }
+
+  .team-left .girl,
+  .team-right .girl {
+    width: 132px;
+  }
+
+  .rope {
+    width: 230px;
   }
 
   .settings-grid {
